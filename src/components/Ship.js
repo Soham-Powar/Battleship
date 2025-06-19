@@ -14,4 +14,12 @@ export default class Ship {
   isSunk() {
     return this.sunk;
   }
+
+  getLength() {
+    return this.length;
+  }
+
+  getHits() {
+    return this.hits;
+  }
 }
