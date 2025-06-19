@@ -44,9 +44,15 @@ export default class GameBoard {
     }
   }
 
+  getAttackedShip([x, y]) {
+    return this.ships.find((ship) => {
+      return ship.shipsCoords.some(([cx, cy]) => cx === x && cy === y);
+    }).ship;
+  }
+
   receiveAttack([x, y]) {
     if (this.#coordHasShip([x, y])) {
-      this.board[x][y].hit();
+      this.getAttackedShip([x, y]).hit();
       return true;
     }
     this.missedShots.push([x, y]);
