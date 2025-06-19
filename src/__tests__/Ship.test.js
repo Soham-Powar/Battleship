@@ -1,6 +1,6 @@
 import Ship from "../components/Ship";
 
-descibe("Ship", () => {
+describe("Ship", () => {
   let ship;
 
   beforeEach(() => {
