@@ -78,9 +78,19 @@ describe("GameBoard", () => {
     expect(gameBoard.receiveAttack([0, 0])).toBeFalsy();
   });
 
-  it("should send hit function on ship hit", () => {
+  it("should call hit function on ship exact hit", () => {
     gameBoard.placeShip(mockShip, [1, 3]);
     gameBoard.receiveAttack([1, 3]);
     expect(mockShip.hit.mock.calls).toHaveLength(1);
+  });
+
+  //ship's length that many blocks will count hit.
+
+  it("should add a missed shot if ship not at coord", () => {
+    gameBoard.receiveAttack([1, 3]);
+    console.log(gameBoard.missedShots);
+    expect(
+      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
+    ).toBeTruthy();
   });
 });

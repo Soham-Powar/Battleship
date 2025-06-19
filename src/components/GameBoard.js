@@ -6,19 +6,23 @@ export default class GameBoard {
       Array(this.columns).fill(null)
     );
     this.ships = [];
-    this.hasShip = [];
+    this.missedShots = [];
   }
 
   #markAllCoords(x, y, shipLength) {
     let i = 0;
+    let shipsCoords = [];
     while (i < shipLength) {
-      this.hasShip.push([x, y++]);
+      shipsCoords.push([x, y++]);
       i++;
     }
+    return shipsCoords;
   }
 
   #coordHasShip([x, y]) {
-    return this.hasShip.some((coord) => coord[0] === x && coord[1] === y);
+    return this.ships.some((ship) => {
+      return ship.shipsCoords.some(([cx, cy]) => cx === x && cy === y);
+    });
   }
 
   placeShip(ship, [x, y]) {
@@ -34,8 +38,8 @@ export default class GameBoard {
       return false;
     } else {
       this.board[x][y] = ship;
-      this.ships.push(ship);
-      this.#markAllCoords(x, y, shipLength);
+      const shipsCoords = this.#markAllCoords(x, y, shipLength);
+      this.ships.push({ ship, shipsCoords });
       return true;
     }
   }
@@ -45,6 +49,7 @@ export default class GameBoard {
       this.board[x][y].hit();
       return true;
     }
+    this.missedShots.push([x, y]);
     return false;
   }
 }
