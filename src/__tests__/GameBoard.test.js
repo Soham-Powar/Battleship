@@ -70,8 +70,6 @@ describe("GameBoard", () => {
     expect(gameBoard.ships.length).toBe(2);
   });
 
-  //Gameboards should have a receiveAttack function that takes a pair of coordinates, determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, or records the coordinates of the missed shot.
-
   // Test cases for receiving hits
   it("should receive a hit if ship present on that coords", () => {
     gameBoard.placeShip(mockShip, [1, 3]);
@@ -96,5 +94,13 @@ describe("GameBoard", () => {
     expect(
       gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
     ).toBeTruthy();
+  });
+
+  it("should not add a missed shot if ship present at coord", () => {
+    gameBoard.placeShip(mockShip, [1, 3]);
+    gameBoard.receiveAttack([1, 3]);
+    expect(
+      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
+    ).toBeFalsy();
   });
 });
