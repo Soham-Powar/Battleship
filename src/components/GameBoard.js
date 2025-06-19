@@ -58,4 +58,8 @@ export default class GameBoard {
     this.missedShots.push([x, y]);
     return false;
   }
+
+  allShipsSunk() {
+    return this.ships.every((ship) => ship.ship.isSunk());
+  }
 }
