@@ -25,4 +25,16 @@ describe("GameBoard", () => {
   it("should initialize with an empty ships array", () => {
     expect(gameBoard.ships).toEqual([]);
   });
+
+  it("should place a ship at given coordinate", () => {
+    const mockShip = {
+      name: "Destroyer",
+      length: 3,
+      hits: 0,
+      sunk: false,
+      hit: jest.fn(),
+      isSunk: jest.fn().mockReturnValue(false),
+    };
+    expect(gameBoard.placeShip(mockShip, [1, 3])).toBeTruthy();
+  });
 });
