@@ -6,15 +6,19 @@ export default class GameBoard {
       Array(this.columns).fill(null)
     );
     this.ships = [];
-    this.coordHasShip = [];
+    this.hasShip = [];
   }
 
   #markAllCoords(x, y, shipLength) {
     let i = 0;
     while (i < shipLength) {
-      this.coordHasShip.push([x, y++]);
+      this.hasShip.push([x, y++]);
       i++;
     }
+  }
+
+  #coordHasShip([x, y]) {
+    return this.hasShip.some((coord) => coord[0] === x && coord[1] === y);
   }
 
   placeShip(ship, [x, y]) {
@@ -25,7 +29,7 @@ export default class GameBoard {
       y < 0 ||
       y > 9 ||
       y + shipLength - 1 > 9 ||
-      this.coordHasShip.some((coord) => coord[0] === x && coord[1] === y)
+      this.#coordHasShip([x, y])
     ) {
       return false;
     } else {
@@ -34,5 +38,13 @@ export default class GameBoard {
       this.#markAllCoords(x, y, shipLength);
       return true;
     }
+  }
+
+  receiveAttack([x, y]) {
+    if (this.#coordHasShip([x, y])) {
+      this.board[x][y].hit();
+      return true;
+    }
+    return false;
   }
 }
