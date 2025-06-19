@@ -4,6 +4,7 @@ describe("GameBoard", () => {
   //scope issues
   let gameBoard;
   let mockShip;
+  let mockShip2;
 
   beforeEach(() => {
     // Reset the game board and mock ship before each test
@@ -78,17 +79,20 @@ describe("GameBoard", () => {
     expect(gameBoard.receiveAttack([0, 0])).toBeFalsy();
   });
 
-  it("should call hit function on ship exact hit", () => {
+  it("should call hit function on ship (exact hit)", () => {
     gameBoard.placeShip(mockShip, [1, 3]);
     gameBoard.receiveAttack([1, 3]);
     expect(mockShip.hit.mock.calls).toHaveLength(1);
   });
 
-  //ship's length that many blocks will count hit.
+  it("should call hit function on ship (other coords - length of ship)", () => {
+    gameBoard.placeShip(mockShip2, [3, 5]);
+    gameBoard.receiveAttack([3, 8]);
+    expect(mockShip2.hit.mock.calls).toHaveLength(1);
+  });
 
   it("should add a missed shot if ship not at coord", () => {
     gameBoard.receiveAttack([1, 3]);
-    console.log(gameBoard.missedShots);
     expect(
       gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
     ).toBeTruthy();
