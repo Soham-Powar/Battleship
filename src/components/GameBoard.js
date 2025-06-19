@@ -7,4 +7,13 @@ export default class GameBoard {
     );
     this.ships = [];
   }
+
+  placeShip(ship, [x, y]) {
+    const shipLength = ship.getLength();
+    if (x < 0 || x > 9 || y < 0 || y > 9) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

@@ -26,7 +26,7 @@ describe("GameBoard", () => {
     expect(gameBoard.ships).toEqual([]);
   });
 
-  it("should place a ship at given coordinate", () => {
+  it("should check if given coordinate for placing ship is valid", () => {
     const mockShip = {
       name: "Destroyer",
       length: 3,
@@ -34,7 +34,10 @@ describe("GameBoard", () => {
       sunk: false,
       hit: jest.fn(),
       isSunk: jest.fn().mockReturnValue(false),
+      getLength: jest.fn().mockReturnValue(3),
+      getHits: jest.fn().mockReturnValue(0),
     };
     expect(gameBoard.placeShip(mockShip, [1, 3])).toBeTruthy();
+    expect(gameBoard.placeShip(mockShip, [-1, 0])).toBeFalsy();
   });
 });
