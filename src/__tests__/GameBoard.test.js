@@ -5,30 +5,25 @@ describe("GameBoard", () => {
   let gameBoard;
   let mockShip;
   let mockShip2;
+  function createMockShip(name, length) {
+    let hits = 0;
 
+    return {
+      name,
+      getLength: jest.fn(() => length),
+      getHits: jest.fn(() => hits),
+      hit: jest.fn(() => {
+        hits++;
+      }),
+      isSunk: jest.fn(() => hits >= length),
+    };
+  }
+
+  // Reset the game board and mock ship before each test
   beforeEach(() => {
-    // Reset the game board and mock ship before each test
     gameBoard = new GameBoard();
-    mockShip = {
-      name: "Destroyer",
-      length: 3,
-      hits: 0,
-      sunk: false,
-      hit: jest.fn(),
-      isSunk: jest.fn().mockReturnValue(false),
-      getLength: jest.fn().mockReturnValue(3),
-      getHits: jest.fn().mockReturnValue(0),
-    };
-    mockShip2 = {
-      name: "Destroyer",
-      length: 4,
-      hits: 0,
-      sunk: false,
-      hit: jest.fn(),
-      isSunk: jest.fn().mockReturnValue(false),
-      getLength: jest.fn().mockReturnValue(4),
-      getHits: jest.fn().mockReturnValue(0),
-    };
+    mockShip = createMockShip("Destroyer", 3);
+    mockShip2 = createMockShip("Cruiser", 4);
   });
 
   // Test cases for GameBoard class
@@ -102,5 +97,36 @@ describe("GameBoard", () => {
     expect(
       gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
     ).toBeFalsy();
+  });
+
+  // all ships sunk or not
+
+  it("should return true if all ships are sunk when only one ship", () => {
+    gameBoard.placeShip(mockShip, [1, 3]);
+    gameBoard.receiveAttack([1, 3]);
+    gameBoard.receiveAttack([1, 4]);
+    gameBoard.receiveAttack([1, 5]);
+    expect(gameBoard.allShipsSunk()).toBeTruthy();
+  });
+
+  it("should return false if not all ships are sunk", () => {
+    gameBoard.placeShip(mockShip, [1, 3]);
+    gameBoard.placeShip(mockShip2, [3, 5]);
+    gameBoard.receiveAttack([1, 3]);
+    gameBoard.receiveAttack([1, 4]);
+    expect(gameBoard.allShipsSunk()).toBeFalsy();
+  });
+
+  it("should return true if all ships are sunk when multiple ships", () => {
+    gameBoard.placeShip(mockShip, [1, 3]);
+    gameBoard.placeShip(mockShip2, [3, 5]);
+    gameBoard.receiveAttack([1, 3]);
+    gameBoard.receiveAttack([1, 4]);
+    gameBoard.receiveAttack([1, 5]);
+    gameBoard.receiveAttack([3, 5]);
+    gameBoard.receiveAttack([3, 6]);
+    gameBoard.receiveAttack([3, 7]);
+    gameBoard.receiveAttack([3, 8]);
+    expect(gameBoard.allShipsSunk()).toBeTruthy();
   });
 });
