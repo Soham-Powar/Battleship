@@ -1,0 +1,30 @@
+body {
+	background-color: pink;
+}
+
+.game-board {
+	background-color: antiquewhite;
+	display: flex;
+	flex-direction: column;
+	height: 400px;
+	width: 400px;
+	margin: 20px auto;
+	border: 1px solid black;
+}
+
+.game-row {
+	background-color: rgb(91, 91, 221);
+	display: flex;
+	flex: 1;
+}
+
+.game-cell {
+	background-color: lightblue;
+	flex: 1;
+	border: 1px solid black;
+
+}
+
+.game-cell:hover {
+	background-color: lightcoral;
+}
