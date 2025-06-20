@@ -44,3 +44,7 @@ body {
 .highlight-missed-shot {
 	background-color: yellow;
 }
+
+.highlight-ship-sunk {
+	background-color: rgb(51, 29, 0);
+}

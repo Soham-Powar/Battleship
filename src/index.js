@@ -6,6 +6,7 @@ import renderGameBoards from "./dom/renderGameBoards";
 import renderShipCoords from "./dom/renderShipCoords";
 import renderMissedShots from "./dom/renderMissedShots";
 import renderAttackedShips from "./dom/renderAttackedShips";
+import renderDestroyedShips from "./dom/renderDestroyedShips";
 
 const player1 = new Player("player1");
 const player2 = new Player("player2");
@@ -48,4 +49,5 @@ export function handleGameBoardClick(playerName, coords) {
   player.gameBoard.receiveAttack(coords);
   renderMissedShots(player);
   renderAttackedShips(player);
+  renderDestroyedShips(player);
 }
