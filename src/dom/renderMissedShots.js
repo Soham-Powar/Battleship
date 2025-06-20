@@ -4,18 +4,14 @@ export default function renderMissedShots(player) {
 
   document
     .querySelectorAll(`.board-${currentPlayer} .game-cell`)
-    .forEach((cell) => {
-      const row = parseInt(cell.dataset.row);
-      const column = parseInt(cell.dataset.column);
+    .forEach((cell) => cell.classList.remove("highlight-missed-shot"));
 
-      const isMissedShot = missedShots.some((coord) => {
-        return coord[0] === row && coord[1] === column;
-      });
-
-      if (isMissedShot) {
-        cell.classList.add("highlight-missed-shot");
-      } else {
-        cell.classList.remove("highlight-missed-shot");
-      }
-    });
+  missedShots.forEach(([row, column]) => {
+    const cell = document.querySelector(
+      `.board-${currentPlayer} .game-cell[data-row="${row}"][data-column="${column}"]`
+    );
+    if (cell) {
+      cell.classList.add("highlight-missed-shot");
+    }
+  });
 }
