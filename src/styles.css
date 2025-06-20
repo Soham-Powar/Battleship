@@ -72,7 +72,8 @@ h6 {
 /* PROJECT CSS */
 
 body {
-	background-color: pink;
+	background-color: #0a192f;
+	color: #f8f9fa;
 }
 
 .main-container {
@@ -96,32 +97,28 @@ body {
 }
 
 .game-cell {
-	background-color: lightblue;
+	background-color: #1f2937;
 	flex: 1;
-	border: 1px solid black;
+	border: 1px solid #324b5e;
 
 }
 
 .game-cell:hover {
-	background-color: lightcoral;
+	background-color: #20c997;
 }
 
 .highlight-ship {
-	background-color: rebeccapurple;
+	background-color: #6c757d;
 }
 
 .highlight-ship-attacked {
-	background-color: red;
-}
-
-.highlight-ship:hover {
-	background-color: rebeccapurple;
+	background-color: #dc3545;
 }
 
 .highlight-missed-shot {
-	background-color: yellow;
+	background-color: #5bc0de;
 }
 
 .highlight-ship-sunk {
-	background-color: rgb(51, 29, 0);
+	background-color: #8b0000;
 }
