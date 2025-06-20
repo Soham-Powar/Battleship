@@ -54,12 +54,27 @@ export default class GameBoard {
   receiveAttack([x, y]) {
     if (this.#coordHasShip([x, y])) {
       const attacked = this.getAttackedShip([x, y]);
-      attacked.ship.hit();
-      attacked.attackedOn.push([x, y]);
+
+      const alreadyHit = attacked.attackedOn.some(
+        ([ax, ay]) => ax === x && ay === y
+      );
+
+      if (!alreadyHit) {
+        attacked.ship.hit();
+        attacked.attackedOn.push([x, y]);
+      }
+
       return true;
     }
 
-    this.missedShots.push([x, y]);
+    const alreadyMissed = this.missedShots.some(
+      ([mx, my]) => mx === x && my === y
+    );
+
+    if (!alreadyMissed) {
+      this.missedShots.push([x, y]);
+    }
+
     return false;
   }
 
