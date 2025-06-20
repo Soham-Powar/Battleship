@@ -27,6 +27,7 @@ export default class GameBoard {
 
   placeShip(ship, [x, y]) {
     const shipLength = ship.getLength();
+    const attackedOn = [];
     if (
       x < 0 ||
       x > 9 ||
@@ -39,27 +40,30 @@ export default class GameBoard {
     } else {
       this.board[x][y] = ship;
       const shipsCoords = this.#markAllCoords(x, y, shipLength);
-      this.ships.push({ ship, shipsCoords });
+      this.ships.push({ ship, shipsCoords, attackedOn });
       return true;
     }
   }
 
   getAttackedShip([x, y]) {
-    return this.ships.find((ship) => {
-      return ship.shipsCoords.some(([cx, cy]) => cx === x && cy === y);
-    }).ship;
+    return this.ships.find((obj) =>
+      obj.shipsCoords.some(([cx, cy]) => cx === x && cy === y)
+    );
   }
 
   receiveAttack([x, y]) {
     if (this.#coordHasShip([x, y])) {
-      this.getAttackedShip([x, y]).hit();
+      const attacked = this.getAttackedShip([x, y]);
+      attacked.ship.hit();
+      attacked.attackedOn.push([x, y]);
       return true;
     }
+
     this.missedShots.push([x, y]);
     return false;
   }
 
   allShipsSunk() {
-    return this.ships.every((ship) => ship.ship.isSunk());
+    return this.ships.every((entry) => entry.ship.isSunk());
   }
 }
