@@ -1,9 +1,11 @@
+import { handleGameBoardClick } from "..";
+
 export default function renderGameBoard() {
   const mainContainer = document.querySelector(".main-container");
 
   const gameBoard = document.createElement("div");
   const heading = document.createElement("h2");
-  heading.innerText = "Player";
+  heading.innerText = "player1";
   mainContainer.appendChild(heading);
   gameBoard.classList.add("game-board");
   gameBoard.classList.add("board-player1");
@@ -16,6 +18,9 @@ export default function renderGameBoard() {
       cell.classList.add("game-cell");
       cell.dataset.row = i;
       cell.dataset.column = j;
+      cell.addEventListener("click", () => {
+        handleGameBoardClick("player1", [i, j]);
+      });
       row.appendChild(cell);
     }
     gameBoard.appendChild(row);
@@ -23,7 +28,7 @@ export default function renderGameBoard() {
 
   const gameBoard2 = document.createElement("div");
   const heading2 = document.createElement("h2");
-  heading2.innerText = "CPU";
+  heading2.innerText = "player2";
   mainContainer.appendChild(heading2);
   gameBoard2.classList.add("game-board");
   gameBoard2.classList.add("board-player2");
@@ -36,6 +41,9 @@ export default function renderGameBoard() {
       cell.classList.add("game-cell");
       cell.dataset.row = i;
       cell.dataset.column = j;
+      cell.addEventListener("click", () => {
+        handleGameBoardClick("player2", [i, j]);
+      });
       row.appendChild(cell);
     }
     gameBoard2.appendChild(row);

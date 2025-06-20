@@ -29,10 +29,18 @@ body {
 	background-color: lightcoral;
 }
 
-.highlight {
+.highlight-ship {
 	background-color: rebeccapurple;
 }
 
-.highlight:hover {
+.highlight-ship-attacked {
+	background-color: red;
+}
+
+.highlight-ship:hover {
 	background-color: rebeccapurple;
+}
+
+.highlight-missed-shot {
+	background-color: yellow;
 }

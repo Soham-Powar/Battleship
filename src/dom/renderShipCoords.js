@@ -1,8 +1,5 @@
-import { addAttackOnShip } from "..";
-
 export default function renderShipCoords(player) {
   const ships = player.gameBoard.ships;
-  console.log(ships);
   const coords = [];
 
   ships.forEach((shipData) => {
@@ -12,7 +9,6 @@ export default function renderShipCoords(player) {
   });
 
   const currentPlayer = player.name;
-  console.log(currentPlayer);
 
   document
     .querySelectorAll(`.board-${currentPlayer} .game-cell`)
@@ -27,13 +23,6 @@ export default function renderShipCoords(player) {
       if (isMatch) {
         // ship is on that coord
         cell.classList.add("highlight-ship");
-
-        cell.addEventListener("click", () => {
-          //   const row = parseInt(cell.dataset.row);
-          //   const column = parseInt(cell.dataset.column);
-          addAttackOnShip("player2", [row, column]);
-          //   cell.classList.add("highlight-ship-attacked");
-        });
       } else {
         cell.classList.remove("highlight-ship");
       }

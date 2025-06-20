@@ -4,6 +4,8 @@ import Ship from "./components/Ship";
 
 import renderGameBoards from "./dom/renderGameBoards";
 import renderShipCoords from "./dom/renderShipCoords";
+import renderMissedShots from "./dom/renderMissedShots";
+import renderAttackedShips from "./dom/renderAttackedShips";
 
 const player1 = new Player("player1");
 const player2 = new Player("player2");
@@ -36,10 +38,14 @@ player2ShipsWithCoords.forEach((data) => {
 renderShipCoords(player1);
 renderShipCoords(player2);
 
-export function addAttackOnShip(playerName, coords) {
+export function handleGameBoardClick(playerName, coords) {
+  let player;
   if (playerName === player1.name) {
-    player1.gameBoard.receiveAttack(coords);
+    player = player1;
   } else {
-    player2.gameBoard.receiveAttack(coords);
+    player = player2;
   }
+  player.gameBoard.receiveAttack(coords);
+  renderMissedShots(player);
+  renderAttackedShips(player);
 }
