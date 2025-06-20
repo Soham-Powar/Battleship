@@ -28,3 +28,11 @@ body {
 .game-cell:hover {
 	background-color: lightcoral;
 }
+
+.highlight {
+	background-color: rebeccapurple;
+}
+
+.highlight:hover {
+	background-color: rebeccapurple;
+}
