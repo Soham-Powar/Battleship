@@ -11,7 +11,7 @@ const player2 = new Player("player2");
 renderGameBoards();
 const player1ShipsWithCoords = [
   { ship: new Ship("Carrier", 5), coords: [0, 0] },
-  { ship: new Ship("Battleship", 4), coords: [2, 1] },
+  { ship: new Ship("Battleship", 4), coords: [2, 5] },
   { ship: new Ship("Cruiser", 3), coords: [4, 3] },
   { ship: new Ship("Submarine", 3), coords: [6, 0] },
   { ship: new Ship("Destroyer", 2), coords: [8, 5] },
@@ -35,3 +35,11 @@ player2ShipsWithCoords.forEach((data) => {
 
 renderShipCoords(player1);
 renderShipCoords(player2);
+
+export function addAttackOnShip(playerName, coords) {
+  if (playerName === player1.name) {
+    player1.gameBoard.receiveAttack(coords);
+  } else {
+    player2.gameBoard.receiveAttack(coords);
+  }
+}
