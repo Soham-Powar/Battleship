@@ -6,6 +6,7 @@ export default function renderGameBoard() {
   heading.innerText = "Player";
   mainContainer.appendChild(heading);
   gameBoard.classList.add("game-board");
+  gameBoard.classList.add("board-player1");
   mainContainer.appendChild(gameBoard);
   for (let i = 0; i < 10; i++) {
     const row = document.createElement("div");
@@ -25,6 +26,7 @@ export default function renderGameBoard() {
   heading2.innerText = "CPU";
   mainContainer.appendChild(heading2);
   gameBoard2.classList.add("game-board");
+  gameBoard2.classList.add("board-player2");
   mainContainer.appendChild(gameBoard2);
   for (let i = 0; i < 10; i++) {
     const row = document.createElement("div");
