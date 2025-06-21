@@ -1,6 +1,6 @@
 import { handleGameBoardClick } from "./handleGameFlow";
 
-export default function renderGameBoard() {
+export default function renderGameBoard(players) {
   const mainContainer = document.querySelector(".main-container");
   mainContainer.innerHTML = "";
 
@@ -35,6 +35,7 @@ export default function renderGameBoard() {
     mainContainer.appendChild(section);
   }
 
-  createBoard("player1");
-  createBoard("player2");
+  createBoard(players[0].name);
+  createBoard(players[1].name);
+  // createBoard(players[1].name);
 }
