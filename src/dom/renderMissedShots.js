@@ -1,4 +1,4 @@
-import toCamelCase from "./toCamelCase";
+import toCamelCase from "../utils/toCamelCase";
 
 export default function renderMissedShots(player) {
   const missedShots = player.gameBoard.missedShots;

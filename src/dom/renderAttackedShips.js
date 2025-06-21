@@ -1,4 +1,4 @@
-import toCamelCase from "./toCamelCase";
+import toCamelCase from "../utils/toCamelCase";
 
 export default function renderAttackedShips(player) {
   const ships = player.gameBoard.ships;

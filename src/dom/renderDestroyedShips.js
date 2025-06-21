@@ -1,4 +1,4 @@
-import toCamelCase from "./toCamelCase";
+import toCamelCase from "../utils/toCamelCase";
 
 export default function renderDestroyedShips(player) {
   const shipsData = player.gameBoard.ships;

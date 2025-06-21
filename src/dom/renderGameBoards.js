@@ -1,5 +1,5 @@
-import { handleGameBoardClick } from "./handleGameFlow";
-import toCamelCase from "./toCamelCase";
+import handleGameBoardClick from "./handleGameBoardClick";
+import toCamelCase from "../utils/toCamelCase";
 
 export default function renderGameBoard(players) {
   const mainContainer = document.querySelector(".main-container");
