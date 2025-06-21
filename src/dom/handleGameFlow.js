@@ -8,6 +8,7 @@ import renderMissedShots from "./renderMissedShots";
 import renderShipCoords from "./renderShipCoords";
 
 let players = [];
+let currentTurnIndex = 0; // 0 for players turn | 1 for cpus turn
 
 function addTempData(players) {
   const player1ShipsWithCoords = [
@@ -46,13 +47,65 @@ export default async function gameStart() {
   renderGameBoards(players);
   addTempData(players);
   renderShipCoords(players[0]);
-  renderShipCoords(players[1]);
+  //   renderShipCoords(players[1]);
 }
 
-export function handleGameBoardClick(playerName, coords) {
-  const player = players.find((p) => p.name === playerName);
-  player.gameBoard.receiveAttack(coords);
-  renderMissedShots(player);
-  renderAttackedShips(player);
-  renderDestroyedShips(player);
+function getRandomUnattackedCoord(player) {
+  const allCoords = [];
+
+  // Generate all 100 coords
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      allCoords.push([i, j]);
+    }
+  }
+
+  // Collect all attacked coordinates (hits + misses)
+  const attackedCoords = [];
+
+  player.gameBoard.ships.forEach(({ attackedOn }) => {
+    attackedOn.forEach((coord) => attackedCoords.push(coord));
+  });
+
+  player.gameBoard.missedShots.forEach((coord) => attackedCoords.push(coord));
+
+  // Filter out attacked coords
+  const unattackedCoords = allCoords.filter(
+    ([x, y]) => !attackedCoords.some(([ax, ay]) => ax === x && ay === y)
+  );
+
+  // Pick one randomly
+  const randomIndex = Math.floor(Math.random() * unattackedCoords.length);
+  return unattackedCoords[randomIndex];
+}
+
+export function handleGameBoardClick(clickedPlayerName, coords) {
+  const currentPlayer = players[currentTurnIndex];
+  const opponent = players[(currentTurnIndex + 1) % 2];
+
+  // Prevent clicking own board
+  if (clickedPlayerName === currentPlayer.name) return;
+
+  opponent.gameBoard.receiveAttack(coords);
+
+  renderMissedShots(opponent);
+  renderAttackedShips(opponent);
+  renderDestroyedShips(opponent);
+
+  if (opponent.gameBoard.allShipsSunk()) {
+    alert(`${currentPlayer.name} wins!`);
+    return;
+  }
+
+  // Now below index points to computer
+  currentTurnIndex = (currentTurnIndex + 1) % 2;
+
+  // If next turn is computers, get random move.
+  const nextPlayer = players[currentTurnIndex];
+  if (nextPlayer.name === "Enemy") {
+    setTimeout(() => {
+      const randomCoord = getRandomUnattackedCoord(currentPlayer);
+      handleGameBoardClick(currentPlayer.name, randomCoord);
+    }, 500);
+  }
 }
