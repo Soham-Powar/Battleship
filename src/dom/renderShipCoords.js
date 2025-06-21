@@ -1,3 +1,5 @@
+import toCamelCase from "./toCamelCase";
+
 export default function renderShipCoords(player) {
   const ships = player.gameBoard.ships;
   const coords = [];
@@ -11,7 +13,7 @@ export default function renderShipCoords(player) {
   const currentPlayer = player.name;
 
   document
-    .querySelectorAll(`.board-${currentPlayer} .game-cell`)
+    .querySelectorAll(`.board-${toCamelCase(currentPlayer)} .game-cell`)
     .forEach((cell) => {
       const row = parseInt(cell.dataset.row);
       const column = parseInt(cell.dataset.column);

@@ -1,14 +1,18 @@
+import toCamelCase from "./toCamelCase";
+
 export default function renderMissedShots(player) {
   const missedShots = player.gameBoard.missedShots;
   const currentPlayer = player.name;
 
   document
-    .querySelectorAll(`.board-${currentPlayer} .game-cell`)
+    .querySelectorAll(`.board-${toCamelCase(currentPlayer)} .game-cell`)
     .forEach((cell) => cell.classList.remove("highlight-missed-shot"));
 
   missedShots.forEach(([row, column]) => {
     const cell = document.querySelector(
-      `.board-${currentPlayer} .game-cell[data-row="${row}"][data-column="${column}"]`
+      `.board-${toCamelCase(
+        currentPlayer
+      )} .game-cell[data-row="${row}"][data-column="${column}"]`
     );
     if (cell) {
       cell.classList.add("highlight-missed-shot");

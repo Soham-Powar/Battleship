@@ -1,4 +1,5 @@
 import { handleGameBoardClick } from "./handleGameFlow";
+import toCamelCase from "./toCamelCase";
 
 export default function renderGameBoard(players) {
   const mainContainer = document.querySelector(".main-container");
@@ -13,7 +14,8 @@ export default function renderGameBoard(players) {
     section.appendChild(heading);
 
     const gameBoard = document.createElement("div");
-    gameBoard.classList.add("game-board", `board-${playerName}`);
+    //while adding class to the div using player's name - it is converted to camelCase
+    gameBoard.classList.add("game-board", `board-${toCamelCase(playerName)}`);
     section.appendChild(gameBoard);
 
     for (let i = 0; i < 10; i++) {
