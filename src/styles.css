@@ -78,10 +78,16 @@ body {
 
 .main-container {
 	display: flex;
+	gap: 150px;
+	margin: auto;
+	justify-content: space-evenly;
+}
+
+.player-section {
+	padding-top: 100px;
 }
 
 .game-board {
-	background-color: antiquewhite;
 	display: flex;
 	flex-direction: column;
 	height: 400px;
@@ -91,7 +97,6 @@ body {
 }
 
 .game-row {
-	background-color: rgb(91, 91, 221);
 	display: flex;
 	flex: 1;
 }
@@ -121,4 +126,24 @@ body {
 
 .highlight-ship-sunk {
 	background-color: #8b0000;
+}
+
+.player-section {
+	padding-top: 20px;
+}
+
+.game-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+}
+
+.game-title img {
+	max-width: 600px;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
