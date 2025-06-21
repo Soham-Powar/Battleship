@@ -1,4 +1,4 @@
-export default function renderDialog() {
+export default function renderNameDialog() {
   return new Promise((resolve) => {
     const mainContainer = document.querySelector(".main-container");
     mainContainer.innerHTML = "";
