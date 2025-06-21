@@ -1,6 +1,7 @@
 import Player from "../components/Player";
 
-import renderDialog from "./renderDialog";
+import renderNameDialog from "./renderNameDialog";
+import renderPlaceShipDialog from "./renderPlaceShipDialog";
 import renderGameBoards from "./renderGameBoards";
 import renderShipCoords from "./renderShipCoords";
 
@@ -10,7 +11,8 @@ export let players = [];
 
 export default async function gameStart() {
   //show dialog to get the player Name
-  const { player1Name, player2Name } = await renderDialog();
+  const { player1Name, player2Name } = await renderNameDialog();
+  await renderPlaceShipDialog();
 
   const player1 = new Player(player1Name);
   const player2 = new Player(player2Name);
