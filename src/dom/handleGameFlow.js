@@ -11,7 +11,7 @@ export let players = [];
 
 export default async function gameStart() {
   //show dialog to get the player Name
-  const { player1Name, player2Name } = await renderNameDialog();
+  // const { player1Name, player2Name } = await renderNameDialog();
   await renderPlaceShipDialog();
 
   const player1 = new Player(player1Name);

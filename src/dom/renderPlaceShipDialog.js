@@ -1,4 +1,7 @@
 import Ship from "../components/Ship";
+import handleShipDrag from "../utils/handleShipDrag";
+import handleShipDrop from "../utils/handleShipDrop";
+import handleShipDragOver from "../utils/handleShipDragOver";
 
 export default function renderPlaceShipDialog() {
   return new Promise((resolve) => {
@@ -26,6 +29,10 @@ export default function renderPlaceShipDialog() {
         cell.classList.add("game-cell");
         cell.dataset.row = i;
         cell.dataset.column = j;
+
+        cell.addEventListener("dragover", handleShipDragOver);
+        cell.addEventListener("drop", handleShipDrop);
+
         row.appendChild(cell);
       }
 
@@ -47,6 +54,12 @@ export default function renderPlaceShipDialog() {
     ships.forEach((ship) => {
       const shipItem = document.createElement("div");
       shipItem.classList.add("ship-item");
+      shipItem.dataset.length = `${ship.length}`;
+      shipItem.dataset.name = `${ship.name}`;
+      shipItem.draggable = true;
+
+      shipItem.addEventListener("dragstart", handleShipDrag);
+
       shipItem.innerText = `${ship.name} (${ship.length})`;
       shipList.appendChild(shipItem);
     });
