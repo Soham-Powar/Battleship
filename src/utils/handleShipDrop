@@ -1,10 +1,20 @@
-export default function handleShipDrop(e) {
+import Ship from "../components/Ship";
+
+export default function handleShipDrop(e, player) {
   e.preventDefault();
   const length = e.dataTransfer.getData("length");
   const name = e.dataTransfer.getData("name");
   const row = e.target.dataset.row;
   const column = e.target.dataset.column;
 
-  console.log(`Dropped ${name} of length ${length} at (${row}, ${column})`);
+  const gameBoard = player.gameBoard;
+  const ship = new Ship(`${name}`, `${length}`);
+  if (gameBoard.placeShip(ship, [row, column])) {
+    console.log(`Dropped ${name} of length ${length} at (${row}, ${column})`);
+    console.log("donezo");
+  } else {
+    console.log(" not doneze");
+  }
+  console.log(player);
   // TODO: place the ship here if valid
 }

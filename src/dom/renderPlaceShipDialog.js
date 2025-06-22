@@ -3,7 +3,7 @@ import handleShipDrag from "../utils/handleShipDrag";
 import handleShipDrop from "../utils/handleShipDrop";
 import handleShipDragOver from "../utils/handleShipDragOver";
 
-export default function renderPlaceShipDialog() {
+export default function renderPlaceShipDialog(player) {
   return new Promise((resolve) => {
     const mainContainer = document.querySelector(".main-container");
     mainContainer.innerHTML = "";
@@ -31,7 +31,9 @@ export default function renderPlaceShipDialog() {
         cell.dataset.column = j;
 
         cell.addEventListener("dragover", handleShipDragOver);
-        cell.addEventListener("drop", handleShipDrop);
+        cell.addEventListener("drop", (e) => {
+          handleShipDrop(e, player);
+        });
 
         row.appendChild(cell);
       }
