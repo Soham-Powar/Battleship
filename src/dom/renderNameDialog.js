@@ -7,10 +7,10 @@ export default function renderNameDialog() {
     dialog.classList.add("dialog");
 
     const heading = document.createElement("h2");
-    heading.innerText = "Enter Player Names";
+    heading.innerText = "Enter Your Name";
 
     const player1Input = document.createElement("input");
-    player1Input.placeholder = "Player 1 Name";
+    player1Input.placeholder = "Player Name";
 
     // const player2Input = document.createElement("input");
     // player2Input.placeholder = "Player 2 Name";
