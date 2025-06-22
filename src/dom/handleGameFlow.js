@@ -23,7 +23,4 @@ export default async function gameStart() {
   renderGameBoards(players);
   addEnemyData(players[1]);
   renderShipCoords(players[0]);
-
-  //computer intelligence
-  //refresh on win and something better than alert
 }

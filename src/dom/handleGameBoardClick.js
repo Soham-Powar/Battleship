@@ -1,6 +1,7 @@
 import renderAttackedShips from "./renderAttackedShips";
 import renderDestroyedShips from "./renderDestroyedShips";
 import renderMissedShots from "./renderMissedShots";
+import endGame from "./handleEndgame";
 
 import getRandomUnattackedCoord from "../utils/getRandomUnattackedCoord";
 
@@ -22,7 +23,7 @@ export default function handleGameBoardClick(clickedPlayerName, coords) {
   renderDestroyedShips(opponent);
 
   if (opponent.gameBoard.allShipsSunk()) {
-    alert(`${currentPlayer.name} wins!`);
+    endGame(`${currentPlayer.name} wins!`);
     return;
   }
 
