@@ -25,7 +25,7 @@ export default class GameBoard {
     });
   }
 
-  placeShip(ship, [x, y]) {
+  placeShip(ship, [x, y], orientation = "horizontal") {
     const shipLength = ship.getLength();
     const attackedOn = [];
     if (
@@ -37,9 +37,13 @@ export default class GameBoard {
       this.#coordHasShip([x, y])
     ) {
       return false;
-    } else {
+    } else if (orientation === "horizontal") {
       this.board[x][y] = ship;
       const shipsCoords = this.#markAllCoords(x, y, shipLength);
+
+      const overlap = shipsCoords.some((coord) => this.#coordHasShip(coord));
+      if (overlap) return false;
+
       this.ships.push({ ship, shipsCoords, attackedOn });
       return true;
     }
