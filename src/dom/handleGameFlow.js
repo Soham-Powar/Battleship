@@ -18,8 +18,9 @@ export default async function gameStart() {
   const player1 = new Player(player1Name);
   const player2 = new Player(player2Name);
   players = [player1, player2];
-  console.log(players);
+
   await renderPlaceShipDialog(players[0]);
+
   renderGameBoards(players);
   addTempData(players);
   renderShipCoords(players[0]);

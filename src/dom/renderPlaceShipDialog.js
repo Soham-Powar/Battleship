@@ -1,7 +1,10 @@
 import Ship from "../components/Ship";
+
 import handleShipDrag from "../utils/handleShipDrag";
 import handleShipDrop from "../utils/handleShipDrop";
 import handleShipDragOver from "../utils/handleShipDragOver";
+
+import toCamelCase from "../utils/toCamelCase";
 
 export default function renderPlaceShipDialog(player) {
   return new Promise((resolve) => {
@@ -19,6 +22,7 @@ export default function renderPlaceShipDialog(player) {
 
     const grid = document.createElement("div");
     grid.classList.add("game-board");
+    grid.classList.add(`board-${toCamelCase(player.name)}`);
 
     for (let i = 0; i < 10; i++) {
       const row = document.createElement("div");

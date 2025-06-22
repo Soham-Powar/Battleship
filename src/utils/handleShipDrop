@@ -1,4 +1,5 @@
 import Ship from "../components/Ship";
+import renderShipCoords from "../dom/renderShipCoords";
 
 export default function handleShipDrop(e, player) {
   e.preventDefault();
@@ -8,13 +9,20 @@ export default function handleShipDrop(e, player) {
   const column = parseInt(e.target.dataset.column);
 
   const gameBoard = player.gameBoard;
-  const ship = new Ship(`${name}`, `${length}`);
+  const ship = new Ship(name, length);
+
   if (gameBoard.placeShip(ship, [row, column])) {
-    console.log(`Dropped ${name} of length ${length} at (${row}, ${column})`);
-    console.log("donezo");
+    renderShipCoords(player);
+    const shipItems = document.querySelectorAll(".ship-item");
+    shipItems.forEach((item) => {
+      if (
+        item.innerText.includes(name) &&
+        parseInt(item.dataset.length) === length
+      ) {
+        item.remove();
+      }
+    });
   } else {
     console.log(" not doneze");
   }
-  console.log(player);
-  // TODO: place the ship here if valid
 }
