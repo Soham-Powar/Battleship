@@ -16,7 +16,7 @@ export default function renderPlaceShipDialog(player) {
     shipDialog.classList.add("ship-dialog");
 
     const heading = document.createElement("h2");
-    heading.innerText = "Place your ships";
+    heading.innerText = `${player.name}, Place your ships`.toUpperCase();
 
     const container = document.createElement("div");
     container.classList.add("ship-placement-container");
