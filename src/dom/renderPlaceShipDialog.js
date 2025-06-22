@@ -8,6 +8,7 @@ import toCamelCase from "../utils/toCamelCase";
 
 export default function renderPlaceShipDialog(player) {
   return new Promise((resolve) => {
+    let orientation = "horizontal";
     const mainContainer = document.querySelector(".main-container");
     mainContainer.innerHTML = "";
 
@@ -36,7 +37,7 @@ export default function renderPlaceShipDialog(player) {
 
         cell.addEventListener("dragover", handleShipDragOver);
         cell.addEventListener("drop", (e) => {
-          handleShipDrop(e, player);
+          handleShipDrop(e, player, orientation);
         });
 
         row.appendChild(cell);
@@ -44,6 +45,18 @@ export default function renderPlaceShipDialog(player) {
 
       grid.appendChild(row);
     }
+
+    // Orientation button
+    const orientationButton = document.createElement("button");
+    orientationButton.innerText = "Orientation: Horizontal";
+    orientationButton.classList.add("orientation-btn");
+
+    orientationButton.addEventListener("click", () => {
+      orientation = orientation === "horizontal" ? "vertical" : "horizontal";
+      orientationButton.innerText = `Orientation: ${orientation
+        .charAt(0)
+        .toUpperCase()}${orientation.slice(1)}`;
+    });
 
     // Right ship list
     const shipList = document.createElement("div");
@@ -82,6 +95,7 @@ export default function renderPlaceShipDialog(player) {
     container.appendChild(grid);
     container.appendChild(shipList);
     shipDialog.appendChild(heading);
+    shipDialog.appendChild(orientationButton);
     shipDialog.appendChild(container);
     shipDialog.appendChild(startButton);
     mainContainer.appendChild(shipDialog);

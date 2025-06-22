@@ -215,7 +215,6 @@ body {
 
 .ship-dialog h2 {
 	font-size: 1.8rem;
-	margin-bottom: 1rem;
 }
 
 .ship-placement-container {
@@ -265,4 +264,13 @@ body {
 
 .start-btn:hover {
 	background-color: #1976d2;
+}
+
+.orientation-btn {
+	padding: 6px 12px;
+	background-color: #34495e;
+	color: #ecf0f1;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
