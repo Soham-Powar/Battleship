@@ -20,9 +20,10 @@ export default async function gameStart() {
   players = [player1, player2];
 
   await renderPlaceShipDialog(players[0]);
-  console.log(players);
   renderGameBoards(players);
   addEnemyData(players[1]);
   renderShipCoords(players[0]);
-  // renderShipCoords(players[1]);
+
+  //computer intelligence
+  //refresh on win and something better than alert
 }
