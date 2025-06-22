@@ -24,5 +24,5 @@ export default async function gameStart() {
   renderGameBoards(players);
   addEnemyData(players[1]);
   renderShipCoords(players[0]);
-  renderShipCoords(players[1]);
+  // renderShipCoords(players[1]);
 }
