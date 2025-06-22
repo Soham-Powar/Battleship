@@ -2,10 +2,10 @@ import Ship from "../components/Ship";
 
 export default function handleShipDrop(e, player) {
   e.preventDefault();
-  const length = e.dataTransfer.getData("length");
+  const length = parseInt(e.dataTransfer.getData("length"));
   const name = e.dataTransfer.getData("name");
-  const row = e.target.dataset.row;
-  const column = e.target.dataset.column;
+  const row = parseInt(e.target.dataset.row);
+  const column = parseInt(e.target.dataset.column);
 
   const gameBoard = player.gameBoard;
   const ship = new Ship(`${name}`, `${length}`);
