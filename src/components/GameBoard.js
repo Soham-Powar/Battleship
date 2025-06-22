@@ -2,6 +2,8 @@ export default class GameBoard {
   constructor() {
     this.rows = 10;
     this.columns = 10;
+
+    // not necessary ?
     this.board = Array.from({ length: this.rows }, () =>
       Array(this.columns).fill(null)
     );
@@ -9,12 +11,14 @@ export default class GameBoard {
     this.missedShots = [];
   }
 
-  #markAllCoords(x, y, shipLength) {
-    let i = 0;
-    let shipsCoords = [];
-    while (i < shipLength) {
-      shipsCoords.push([x, y++]);
-      i++;
+  #markAllCoords(x, y, shipLength, orientation) {
+    const shipsCoords = [];
+    for (let i = 0; i < shipLength; i++) {
+      if (orientation === "vertical") {
+        shipsCoords.push([x + i, y]);
+      } else {
+        shipsCoords.push([x, y + i]);
+      }
     }
     return shipsCoords;
   }
@@ -28,25 +32,23 @@ export default class GameBoard {
   placeShip(ship, [x, y], orientation = "horizontal") {
     const shipLength = ship.getLength();
     const attackedOn = [];
-    if (
-      x < 0 ||
-      x > 9 ||
-      y < 0 ||
-      y > 9 ||
-      y + shipLength - 1 > 9 ||
-      this.#coordHasShip([x, y])
-    ) {
-      return false;
-    } else if (orientation === "horizontal") {
-      this.board[x][y] = ship;
-      const shipsCoords = this.#markAllCoords(x, y, shipLength);
 
-      const overlap = shipsCoords.some((coord) => this.#coordHasShip(coord));
-      if (overlap) return false;
+    if (x < 0 || y < 0 || x >= this.rows || y >= this.columns) return false;
 
-      this.ships.push({ ship, shipsCoords, attackedOn });
-      return true;
-    }
+    const outOfBounds =
+      orientation === "horizontal"
+        ? y + shipLength > this.columns
+        : x + shipLength > this.rows;
+
+    if (outOfBounds) return false;
+
+    const shipsCoords = this.#markAllCoords(x, y, shipLength, orientation);
+
+    const overlap = shipsCoords.some((coord) => this.#coordHasShip(coord));
+    if (overlap) return false;
+
+    this.ships.push({ ship, shipsCoords, attackedOn });
+    return true;
   }
 
   getAttackedShip([x, y]) {
