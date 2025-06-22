@@ -129,4 +129,32 @@ describe("GameBoard", () => {
     gameBoard.receiveAttack([3, 8]);
     expect(gameBoard.allShipsSunk()).toBeTruthy();
   });
+
+  // handle horizontal and vertical orientation
+  it("should place ship vertically", () => {
+    const gameBoard = new GameBoard();
+    expect(gameBoard.placeShip(mockShip, [1, 3], "vertical")).toBeTruthy();
+    expect(gameBoard.ships[0].shipsCoords).toEqual([
+      [1, 3],
+      [2, 3],
+      [3, 3],
+    ]);
+  });
+
+  it("should place ship horizontally", () => {
+    const gameBoard = new GameBoard();
+    expect(gameBoard.placeShip(mockShip, [1, 3], "horizontal")).toBeTruthy();
+    expect(gameBoard.ships[0].shipsCoords).toEqual([
+      [1, 3],
+      [1, 4],
+      [1, 5],
+    ]);
+  });
+
+  it("should not place ship vertically if out of bounds", () => {
+    const gameBoard = new GameBoard();
+    expect(gameBoard.placeShip(mockShip, [8, 3], "vertical")).toBeFalsy();
+  });
 });
+
+// handle vertical orientation
