@@ -310,3 +310,15 @@ body {
 .game-over-button:hover {
 	background-color: #f0f0f0;
 }
+
+.toggle-music {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	padding: 10px;
+	font-size: 1.5rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}

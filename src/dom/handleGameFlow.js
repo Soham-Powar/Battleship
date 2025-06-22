@@ -6,10 +6,12 @@ import renderGameBoards from "./renderGameBoards";
 import renderShipCoords from "./renderShipCoords";
 
 import addEnemyData from "../utils/addEnemyData";
+import handleBgMusic from "./handleBgMusic";
 
 export let players = [];
 
 export default async function gameStart() {
+  handleBgMusic();
   //show dialog to get the player Name
   const { player1Name, player2Name } = await renderNameDialog();
   // const player1Name = "s";
