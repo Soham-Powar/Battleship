@@ -19,10 +19,7 @@ export default function addEnemyData(player) {
   ships.forEach((ship) => {
     let placed = false;
     while (!placed) {
-      const coord = getRandomHorizontalCoord(
-        ship.getLength(),
-        player.gameBoard
-      );
+      const coord = getRandomCoord(ship.getLength());
       placed = player.gameBoard.placeShip(ship, coord);
     }
   });

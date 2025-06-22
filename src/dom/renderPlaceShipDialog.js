@@ -1,7 +1,7 @@
 import Ship from "../components/Ship";
 
 import handleShipDrag from "../utils/handleShipDrag";
-import handleShipDrop from "../utils/handleShipDrop";
+import handleShipDrop from "../utils/handleShipDrop.js";
 import handleShipDragOver from "../utils/handleShipDragOver";
 
 import toCamelCase from "../utils/toCamelCase";

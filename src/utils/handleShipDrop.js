@@ -23,6 +23,6 @@ export default function handleShipDrop(e, player) {
       }
     });
   } else {
-    console.log(" not doneze");
+    console.log(" not donezo");
   }
 }
