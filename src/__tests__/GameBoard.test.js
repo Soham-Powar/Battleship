@@ -87,7 +87,7 @@ describe("GameBoard", () => {
   it("should add a missed shot if ship not at coord", () => {
     gameBoard.receiveAttack([1, 3]);
     expect(
-      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
+      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3),
     ).toBeTruthy();
   });
 
@@ -95,7 +95,7 @@ describe("GameBoard", () => {
     gameBoard.placeShip(mockShip, [1, 3]);
     gameBoard.receiveAttack([1, 3]);
     expect(
-      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3)
+      gameBoard.missedShots.some((coord) => coord[0] === 1 && coord[1] === 3),
     ).toBeFalsy();
   });
 

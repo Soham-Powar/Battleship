@@ -57,7 +57,7 @@ export default function getRandomUnattackedCoord(player) {
 
   // If no coords in proximity - Filter out attacked coords
   const unattackedCoords = allCoords.filter(
-    ([x, y]) => !attackedCoords.some(([ax, ay]) => ax === x && ay === y)
+    ([x, y]) => !attackedCoords.some(([ax, ay]) => ax === x && ay === y),
   );
 
   // Pick one randomly

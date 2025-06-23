@@ -5,7 +5,7 @@ export default class GameBoard {
 
     // not necessary ?
     this.board = Array.from({ length: this.rows }, () =>
-      Array(this.columns).fill(null)
+      Array(this.columns).fill(null),
     );
     this.ships = [];
     this.missedShots = [];
@@ -53,7 +53,7 @@ export default class GameBoard {
 
   getAttackedShip([x, y]) {
     return this.ships.find((obj) =>
-      obj.shipsCoords.some(([cx, cy]) => cx === x && cy === y)
+      obj.shipsCoords.some(([cx, cy]) => cx === x && cy === y),
     );
   }
 
@@ -62,7 +62,7 @@ export default class GameBoard {
       const attacked = this.getAttackedShip([x, y]);
 
       const alreadyHit = attacked.attackedOn.some(
-        ([ax, ay]) => ax === x && ay === y
+        ([ax, ay]) => ax === x && ay === y,
       );
 
       if (!alreadyHit) {
@@ -74,7 +74,7 @@ export default class GameBoard {
     }
 
     const alreadyMissed = this.missedShots.some(
-      ([mx, my]) => mx === x && my === y
+      ([mx, my]) => mx === x && my === y,
     );
 
     if (!alreadyMissed) {

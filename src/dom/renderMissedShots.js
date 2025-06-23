@@ -11,8 +11,8 @@ export default function renderMissedShots(player) {
   missedShots.forEach(([row, column]) => {
     const cell = document.querySelector(
       `.board-${toCamelCase(
-        currentPlayer
-      )} .game-cell[data-row="${row}"][data-column="${column}"]`
+        currentPlayer,
+      )} .game-cell[data-row="${row}"][data-column="${column}"]`,
     );
     if (cell) {
       cell.classList.add("highlight-missed-shot");
